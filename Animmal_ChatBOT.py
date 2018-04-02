@@ -1,5 +1,5 @@
 
-#from builtins import print
+# from builtins import print
 import datetime
 import pprint
 import time
@@ -7,7 +7,8 @@ import time
 import telebot
 from telebot import types
 import os
-API_TOKEN = 'TOKEN'
+
+API_TOKEN = '469509215:AAHCAF2jI5CsEpJFUzG6WhRKLbpJIuVN9vw'
 bot = telebot.TeleBot(API_TOKEN)
 
 markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
@@ -16,46 +17,48 @@ hideBoard = types.ReplyKeyboardRemove()
 
 @bot.message_handler(content_types='photo')
 def photo(message):
-    bot.send_message(message.chat.id,'Wait for 35 seconds')
-    fileId=message.photo[-1].file_id
-    name=fileId+".jpg"
+    bot.send_message(message.chat.id, 'Wait for 35 seconds')
+    fileId = message.photo[-1].file_id
+    name = fileId + ".jpg"
     file_info = bot.get_file(fileId)
     print('file.file_path =', file_info.file_path)
     downloaded_file = bot.download_file(file_info.file_path)
     with open("bot.jpg", 'wb') as new_file:
         new_file.write(downloaded_file)
-    ans='./darknet detect cfg/yolo.cfg yolo.weights'+' '+'data/'+name
-    result=os.popen(str(ans)).read()
-    result=result.split()[-2]+result.split()[-1]
-    bot.send_message(message.chat.id,result)
-    #os.system()
+    ans = './darknet detect cfg/yolo.cfg yolo.weights' + ' ' + 'data/' + name
+    result = os.popen(str(ans)).read()
+    result = result.split()[-2] + result.split()[-1]
+    bot.send_message(message.chat.id, result)
+    # os.system()
 
 
-@bot.message_handler(commands=['Help','help'])
+@bot.message_handler(commands=['Help', 'help'])
 def start(message):
-    ans='/dog : Get info about dog \n' \
-        '/cat : Get info about cat \n' \
-        '/sheep : Get info about sheep \n' \
-        '/cow : Get info about cow \n' \
-        '/horse : Get info about horse \n' \
-        '/elephant : Get info about elephant \n' \
-        '/bear : Get info about bear \n' \
-        '/zebra : Get info about zebra \n' \
-        '/bear : Get info about bear'
+    ans = '/dog : Get info about dog \n' \
+          '/cat : Get info about cat \n' \
+          '/sheep : Get info about sheep \n' \
+          '/cow : Get info about cow \n' \
+          '/horse : Get info about horse \n' \
+          '/elephant : Get info about elephant \n' \
+          '/bear : Get info about bear \n' \
+          '/zebra : Get info about zebra \n' \
+          '/bear : Get info about bear'
     bot.send_message(message.chat.id, ans)
 
 
-@bot.message_handler(commands=['Dog','dog'])
+@bot.message_handler(commands=['Dog', 'dog'])
 def dog_method(message):
-    ans = 'Dogs have four legs and make a "bark," "woof," or "arf" sound. Dogs often chase cats, and most dogs will fetch a ball or stick.'\
-            'Dogs can smell and hear better than humans, but cannot see well in color because they are color blind. Due to the anatomy of the eye, ' \
-            'dogs can see better in dim light than humans. They also have a wider field of vision. '\
-            'Like wolves, wild dogs travel in groups called packs. Packs of dogs are ordered by rank, ' \
-            'and dogs with low rank will submit to other dogs with higher rank. The highest ranked dog is called the ' \
+    ans = 'Dogs have four legs and make a "bark," "woof," or "arf" sound. Dogs often chase cats, and most dogs will fetch a ball or stick.' \
+          'Dogs can smell and hear better than humans, but cannot see well in color because they are color blind. Due to the anatomy of the eye, ' \
+          'dogs can see better in dim light than humans. They also have a wider field of vision. ' \
+          'Like wolves, wild dogs travel in groups called packs. Packs of dogs are ordered by rank, ' \
+          'and dogs with low rank will submit to other dogs with higher rank. The highest ranked dog is called the ' \
           'alpha male. A dog in a group helps and cares for others. Domesticated dogs often view their owner as the alpha male.'
+    bot.send_photo(message.chat.id,open('Sample/dog.jpg','rb'))
     bot.send_message(message.chat.id, ans)
 
-@bot.message_handler(commands=['Cat','cat'])
+
+@bot.message_handler(commands=['Cat', 'cat'])
 def cat_method(message):
     ans = 'Cats are similar in anatomy to the other felids, with a strong flexible body, quick reflexes, ' \
           'sharp retractable claws and teeth adapted to killing small prey. Cat senses fit a crepuscular ' \
@@ -65,9 +68,11 @@ def cat_method(message):
           ' Cats, despite being solitary hunters, are a social species, and cat communication includes the ' \
           'use of a variety of vocalizations (mewing, purring, trilling, hissing, growling and grunting) as ' \
           'well as cat pheromones and types of cat-specific body language.'
+    bot.send_photo(message.chat.id, open('Sample/cat.jpg', 'rb'))
     bot.send_message(message.chat.id, ans)
 
-@bot.message_handler(commands=['Horse','horse'])
+
+@bot.message_handler(commands=['Horse', 'horse'])
 def horse_method(message):
     ans = 'Most breeds of horses are able to perform work such as carrying humans on their backs' \
           ' or be harnessed to pull objects such as carts or plows. However, horse breeds were ' \
@@ -76,9 +81,11 @@ def horse_method(message):
           ' Some horses, such as the miniature horse, can be kept as pets.The horse plays a prominent' \
           ' role as a figure in the ideals of religion and art and plays an important role in' \
           ' transportation, agriculture and warfare. '
+    bot.send_photo(message.chat.id, open('Sample/horse.jpg', 'rb'))
     bot.send_message(message.chat.id, ans)
 
-@bot.message_handler(commands=['sheep','sheep'])
+
+@bot.message_handler(commands=['sheep', 'sheep'])
 def sheep_method(message):
     ans = 'Domestic sheep are relatively small ruminants, typically with horns forming a lateral' \
           ' spiral and crimped hair called wool. A sheep is an animal which has a thick coat of ' \
@@ -96,9 +103,11 @@ def sheep_method(message):
           ' is a large gap instead between the incisors and the premolars. Until the age of four' \
           ' (when all the adult teeth have erupted), it is possible to see the age of sheep' \
           ' from their front teeth, as a pair of incisors erupts each year.'
+    bot.send_photo(message.chat.id, open('Sample/sheep.jpg', 'rb'))
     bot.send_message(message.chat.id, ans)
 
-@bot.message_handler(commands=['Cow','cow'])
+
+@bot.message_handler(commands=['Cow', 'cow'])
 def cow_method(message):
     ans = 'Cows are raised for many reasons including: milk, cheese, other dairy products, also' \
           ' for meat such as beef and veal and materials such as leather hide. In older times they ' \
@@ -109,9 +118,11 @@ def cow_method(message):
           ' we walk or drive through the countryside.There is an estimated 1.3 billion head of' \
           ' cattle and 920 breeds of cow in the world today. Cows are referred to as the ‘fosters' \
           ' mothers to the human race’ because they produce most of the milk that people drink.'
+    bot.send_photo(message.chat.id, open('Sample/cow.jpg', 'rb'))
     bot.send_message(message.chat.id, ans)
 
-@bot.message_handler(commands=['Elephant','elephant'])
+
+@bot.message_handler(commands=['Elephant', 'elephant'])
 def elephant_method(message):
     ans = 'Elephants are scattered throughout sub-Saharan Africa, South Asia, and Southeast Asia. ' \
           'Elephantidae is the only surviving family of the order Proboscidea; other, now extinct, ' \
@@ -130,9 +141,11 @@ def elephant_method(message):
           'multiple family groups come together to socialise. Females ("cows") tend to live in family ' \
           'groups, which can consist of one female with her calves or several related females with ' \
           'offspring. The groups are led by an individual known as the matriarch, often the oldest cow.'
+    bot.send_photo(message.chat.id, open('Sample/elephant.jpg', 'rb'))
     bot.send_message(message.chat.id, ans)
 
-@bot.message_handler(commands=['Bear','bear'])
+
+@bot.message_handler(commands=['Bear', 'bear'])
 def bear_method(message):
     ans = 'Bears are found on the continents of North America, South America, Europe, and Asia.' \
           ' Common characteristics of modern bears include large bodies with stocky legs, long snouts,' \
@@ -153,9 +166,11 @@ def bear_method(message):
           ' concern species, such as the brown bear, are at risk of extirpation in certain countries.' \
           ' The poaching and international trade of these most threatened populations are prohibited,' \
           ' but still ongoing.'
+    bot.send_photo(message.chat.id, open('Sample/bear.jpg', 'rb'))
     bot.send_message(message.chat.id, ans)
 
-@bot.message_handler(commands=['Zebra','zebra'])
+
+@bot.message_handler(commands=['Zebra', 'zebra'])
 def zebra_method(message):
     ans = 'Zebras are equids – members of the horse family (Equidae) and are medium sized, odd-toed' \
           ' ungulates. Zebras are native to southern and central Africa. Although zebras are very' \
@@ -164,9 +179,11 @@ def zebra_method(message):
           ' grasslands.Zebras were the second species to diverge from the earliest proto-horses,' \
           ' after the asses, around 4 million years ago. The Grevy’s zebra is believed to have' \
           ' been the first zebra species to emerge.'
+    bot.send_photo(message.chat.id, open('Sample/zebra.jpg', 'rb'))
     bot.send_message(message.chat.id, ans)
 
-@bot.message_handler(commands=['Giraffe','giraffe'])
+
+@bot.message_handler(commands=['Giraffe', 'giraffe'])
 def giraffe_method(message):
     ans = 'The Giraffe (Giraffa camelopardalis meaning ‘fast walking camel leopard) is an African' \
           ' even-toed ungulate mammal, the tallest of all land-living animal species.The giraffe is ' \
@@ -178,6 +195,7 @@ def giraffe_method(message):
           ' however, the earliest fossil records of the giraffe itself, from Israel and Africa, date' \
           ' back about 1.5 million years.Male giraffes are called ‘Bulls’, female giraffes are called' \
           ' ‘Cows’ and baby giraffes are called ‘Calves’.'
+    bot.send_photo(message.chat.id, open('Sample/giraffe.jpg', 'rb'))
     bot.send_message(message.chat.id, ans)
 
 
