@@ -8,7 +8,7 @@ import time
 import telebot
 from telebot import types
 import os
-API_TOKEN = '469509215:AAHCAF2jI5CsEpJFUzG6WhRKLbpJIuVN9vw'
+API_TOKEN = 'APITOKEN'
 bot = telebot.TeleBot(API_TOKEN)
 client = MongoClient('localhost', 27017)
 db = client.test_MD_Todo
