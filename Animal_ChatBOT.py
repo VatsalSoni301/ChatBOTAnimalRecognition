@@ -8,7 +8,7 @@ import telebot
 from telebot import types
 import os
 
-API_TOKEN = '469509215:AAHCAF2jI5CsEpJFUzG6WhRKLbpJIuVN9vw'
+API_TOKEN = 'Your API Token'
 bot = telebot.TeleBot(API_TOKEN)
 
 markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
